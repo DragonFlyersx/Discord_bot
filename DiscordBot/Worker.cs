@@ -1,10 +1,7 @@
+// Worker.cs
 using DSharpPlus;
 using DSharpPlus.SlashCommands;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace DiscordBot
 {
@@ -12,13 +9,15 @@ namespace DiscordBot
     {
         private readonly ILogger<Worker> logger;
         private readonly IConfiguration configuration;
+        private readonly IServiceProvider services;
         private DiscordClient discordClient;
         private SlashCommandsExtension slashCommands;
 
-        public Worker(ILogger<Worker> logger, IConfiguration configuration)
+        public Worker(ILogger<Worker> logger, IConfiguration configuration, IServiceProvider services)
         {
             this.logger = logger;
             this.configuration = configuration;
+            this.services = services;
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
@@ -33,7 +32,13 @@ namespace DiscordBot
                 Intents = DiscordIntents.AllUnprivileged
             });
 
-            slashCommands = discordClient.UseSlashCommands();
+            var databaseContext = new DatabaseContext("Data Source=discordbot.db");
+            await databaseContext.InitializeDatabaseAsync();
+
+            slashCommands = discordClient.UseSlashCommands(new SlashCommandsConfiguration
+            {
+                Services = services
+            });
             slashCommands.RegisterCommands<CommandsModule>();
 
             await discordClient.ConnectAsync();
