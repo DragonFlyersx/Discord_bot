@@ -4,3 +4,4 @@
 discordbot.db
 bin
 obj
+.env

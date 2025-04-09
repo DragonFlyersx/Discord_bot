@@ -13,6 +13,9 @@ public class DatabaseContext
     public DatabaseContext(string connectionString)
     {
         this.connectionString = connectionString;
+        Console.WriteLine("DatabaseContext initialized with connection string: " + connectionString);
+        
+        Console.WriteLine("Debug: DatabaseContext constructor called");
     }
 
     public async Task InitializeDatabaseAsync()

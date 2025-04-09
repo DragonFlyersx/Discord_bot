@@ -24,7 +24,7 @@ namespace DiscordBot
         {
             logger.LogInformation("Starting discord bot");
 
-            string discordBotToken = configuration["DiscordBotToken"];
+            string discordBotToken = Environment.GetEnvironmentVariable("SECRET_TOKEN");
             discordClient = new DiscordClient(new DiscordConfiguration()
             {
                 Token = discordBotToken,
@@ -32,7 +32,7 @@ namespace DiscordBot
                 Intents = DiscordIntents.AllUnprivileged
             });
 
-            var databaseContext = new DatabaseContext("Data Source=discordbot.db");
+            var databaseContext = services.GetRequiredService<DatabaseContext>();
             await databaseContext.InitializeDatabaseAsync();
 
             slashCommands = discordClient.UseSlashCommands(new SlashCommandsConfiguration

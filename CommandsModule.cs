@@ -76,7 +76,7 @@ namespace DiscordBot
         public async Task HelpFunCommand(InteractionContext ctx)
         {
             Console.WriteLine("Help command invoked");
-            var helpMessage = "Fuck dig";
+            var helpMessage = "This application is still being worked on for more use /HelpCommands";
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent(helpMessage));
         }
         
@@ -91,7 +91,7 @@ namespace DiscordBot
                               "/GetTasks - Gets all tasks assigned to a user\n" +
                               "/CompleteTask - Completes a task assigned to a user\n" +
                               "/GetAllTasks - Gets all tasks assigned to all users\n" + */
-                              "/Help - Displays this help message";
+                              "/HelpCommands - Displays this help message";
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent(helpMessage));
         }
         
