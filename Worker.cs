@@ -23,7 +23,8 @@ namespace DiscordBot
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
             logger.LogInformation("Starting discord bot");
-
+            DotNetEnv.Env.Load();
+            
             string discordBotToken = Environment.GetEnvironmentVariable("SECRET_TOKEN");
             discordClient = new DiscordClient(new DiscordConfiguration()
             {
