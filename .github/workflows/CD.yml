@@ -6,6 +6,8 @@ on:
     # Run workflow every time something is pushed with tags v* (v1.0, v20.15.10)
     tags:
       - 'v*'
+  workflow_dispatch:
+    manual: true
   # allow manual triggers for now too
 # Remember to set the following secrets in your repository's settings:
 # https://github.com/your_username/itu-minitwit-ci/settings/secrets/actions
