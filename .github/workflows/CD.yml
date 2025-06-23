@@ -51,17 +51,17 @@ jobs:
 
       - name: Sync docker-compose.yml to Server
         run: |
-          rsync -avz -e "ssh -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no" ./docker-compose.yml $SSH_USER@$SSH_HOST2:/discordbot/
+          rsync -avz -e "ssh -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no" ./docker-compose.yml $SSH_USER@$SSH_HOST:/DiscordBot/
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_HOST2: ${{ secrets.SSH_HOST }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
 
 
       - name: Deploy to server
         # Configure the ~./bash_profile and deploy.sh file on the Vagrantfile
         run: >
           ssh $SSH_USER@$SSH_HOST -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no
-          /minitwit/deploy.sh
+          /DiscordBot/deploy.sh
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
