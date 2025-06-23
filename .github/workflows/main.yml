@@ -34,9 +34,9 @@ jobs:
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
 
-      - name: Sync docker-compose.yml to Server
+      - name: Sync readme to Server
         run: |
-          rsync -avz -e "ssh -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no" ./readme.md $SSH_USER@$SSH_HOST2:/discordbot/
+          rsync -avz -e "ssh -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no" ./readme.md $SSH_USER@$SSH_HOST:/discordbot/
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST2: ${{ secrets.SSH_HOST }}
