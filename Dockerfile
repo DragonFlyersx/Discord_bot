@@ -47,7 +47,7 @@ WORKDIR /app
 
 # Copy everything needed to run the app from the "build" stage.
 COPY --from=build /app .
-COPY ./Data /app/Data
+# COPY ./Data /app/Data
 RUN mkdir -p /app/Data && chmod -R 777 /app/Data
 
 
