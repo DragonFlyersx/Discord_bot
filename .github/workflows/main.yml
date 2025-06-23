@@ -6,7 +6,9 @@ on:
     # Run workflow every time something is pushed with tags v* (v1.0, v20.15.10)
     tags:
       - 'v*'
-
+  workflow_dispatch:
+    manual: true
+    
 jobs:
   build:
     runs-on: ubuntu-latest
